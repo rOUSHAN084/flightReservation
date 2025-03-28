@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reservation System</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .company-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px; /* You can adjust the size as needed */
+            font-weight: 600;
+            color: #69b8f1; 
+            margin-left: 15px; /* Space between logo and text */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .booking-section {
+    background-color: #f4f4f9; /* Light background for contrast */
+}
+
+.booking-form input, .booking-form select {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.booking-form button {
+    background-color: orange; /* Set button color to orange */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.booking-form button:hover {
+    background-color: darkorange; /* Change color on hover */
+}
+
+.booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+        }
+
+    .search-button {
+        padding: 15px 30px; /* Increase padding for a bigger button */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Slightly rounded corners */
+        background-color: orange; /* Button color */
+        color: white; /* Text color */
+        cursor: pointer; /* Change cursor on hover */
+        font-size: 18px; /* Increase font size */
+        font-family: 'Arial', sans-serif; /* Change font */
+        transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effects */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    }
+
+    .search-button:hover {
+        background-color: #ff8c00; /* Darker shade on hover */
+        transform: scale(1.05); /* Slightly increase size on hover */
+    }
+
+    .features-section {
+    display: flex; /* Align features in a row */
+    justify-content: space-around; /* Space evenly */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    padding: 20px; /* Add padding */
+    background-color: transparent; /* Keep the background transparent */
+}
+
+.feature {
+    position: relative; /* Position relative for image overlay */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    border-radius: 10px; /* Rounded corners */
+    margin: 15px; /* Space between feature boxes */
+    width: calc(30% - 30px); /* Adjust width to fit 3 items in a row */
+    transition: transform 0.3s; /* Transition for hover effects */
+}
+
+.feature img {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners for images */
+    transition: transform 0.5s ease; /* Smooth scaling transition */
+}
+
+/* Stylish fonts for text */
+.feature h3 {
+    text-align: center; /* Center text */
+    margin: 10px 0; /* Margin for spacing */
+    font-family: 'Georgia', serif; /* Stylish font */
+    font-size: 24px; /* Font size */
+    color: #333; /* Text color */
+}
+
+.feature p {
+    text-align: center; /* Center text */
+    color: #666; /* Text color */
+    font-family: 'Arial', sans-serif; /* Font family */
+}
+
+/* Hover effects */
+.feature:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.feature:hover img {
+    transform: scale(1.1); /* Slightly scale the image on hover */
+    filter: brightness(0.9); /* Darken image slightly on hover */
+}
+
+.review-section {
+    background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Max width for the section */
+    margin: 30px auto; /* Center the section */
+}
+
+.review-title {
+    text-align: center;
+    font-family: 'Georgia', serif; /* Stylish font for title */
+    font-size: 28px; /* Font size */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Margin for spacing */
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column; /* Vertical alignment of form elements */
+}
+
+.review-form label {
+    font-family: 'Arial', sans-serif; /* Font family for labels */
+    margin-bottom: 5px; /* Margin for spacing */
+    font-weight: bold; /* Bold text */
+}
+
+.review-form input,
+.review-form textarea {
+    padding: 10px; /* Padding for input fields */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between inputs */
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-size: 16px; /* Font size */
+}
+
+.submit-button {
+    padding: 10px 20px; /* Padding for button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #ff5722; /* Button color */
+    color: white; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 18px; /* Increase font size */
+    font-family: 'Arial', sans-serif; /* Font family */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+}
+
+.submit-button:hover {
+    background-color: #e64a19; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.contact-section {
+    background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Max width for the section */
+    margin: 30px auto; /* Center the section */
+}
+
+.contact-title {
+    text-align: center;
+    font-family: 'Georgia', serif; /* Stylish font for title */
+    font-size: 28px; /* Font size */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Margin for spacing */
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column; /* Vertical alignment of form elements */
+}
+
+.contact-form label {
+    font-family: 'Arial', sans-serif; /* Font family for labels */
+    margin-bottom: 5px; /* Margin for spacing */
+    font-weight: bold; /* Bold text */
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px; /* Padding for input fields */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between inputs */
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-size: 16px; /* Font size */
+}
+
+.submit-button {
+    padding: 10px 20px; /* Padding for button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 18px; /* Increase font size */
+    font-family: 'Arial', sans-serif; /* Font family */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+
+
+
+
+
+
+
+
+
+        /* Header Section */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+         /* Logo inside the header */
+         .logo {
+            width: 50px; /* Small logo size */
+            height: auto;
+        }
+
+        /* Navigation Menu */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 18px;
+            position: relative;
+        }
+
+        /* Hover Effects on Navigation Links */
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -6px;
+            left: 50%;
+            background-color: #ffd700;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section with Background Image */
+        .hero {
+            height: 100vh;
+            background-image: url('image2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: rgb(255, 253, 253);
+            padding: 0 20px;
+            position: relative; /* To position logo */
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+            color: #fefefe; /* Change font color for readability */
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease-in-out;
+            color: #ffffff; /* Change font color for readability */
+        }
+
+        .hero button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* About Us Section */
+        .about-section {
+            background-color: #ffffff;
+            padding: 60px 20px;
+        }
+
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            background-image: url('image.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: #f4f4f9;
+        }
+
+        .features-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            flex: 1;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .feature img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 16px;
+        }
+
+        /* Reviews Section */
+.reviews-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+}
+
+.reviews-section h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.review-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.review-card {
+    background-color: #f9f9fb;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    flex: 1 1 30%; /* For responsiveness */
+}
+
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.review-card p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.review-card strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #007bff;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Leave a Review Form */
+.leave-review {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.leave-review form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Reduced width for smaller form */
+}
+
+.leave-review input, 
+.leave-review textarea, 
+.leave-review button {
+    width: 100%;
+    padding: 8px; /* Smaller padding for smaller input fields */
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px; /* Reduced margin for a tighter layout */
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; /* Smaller font size for a compact look */
+    transition: all 0.3s ease;
+}
+
+.leave-review textarea {
+    height: 100px; /* Reduced textarea height */
+}
+
+.leave-review button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size for the button */
+    font-weight: 600;
+    padding: 8px 16px; /* Smaller button padding */
+    border-radius: 5px;
+    border: none;
+}
+
+.leave-review button:hover {
+    background-color: #0056b3;
+}
+
+.leave-review input:focus, 
+.leave-review textarea:focus, 
+.leave-review button:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+
+
+        /* Contact Us Section */
+.contact-section {
+    background-color: #f4f4f9;
+    padding: 60px 20px;
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-content h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+/* Updated Input Styles for Contact Form */
+.contact-form input, 
+.contact-form textarea, 
+.contact-form button {
+    padding: 12px; /* Ensure adequate padding for input fields */
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    margin-bottom: 20px; /* Maintain a consistent margin */
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; /* Slightly larger font size for better readability */
+}
+
+.contact-form textarea {
+    height: 200px; /* Increase textarea height for a bigger input area */
+}
+
+.contact-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Keep button font size consistent */
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Company Logo" class="logo"> <!-- Add your logo here -->
+            <span class="company-name">DREAMFLY</span>
+        </div>
+    
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#bookingSection">Book a Flight</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    
+        <!-- Logout Button -->
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </header>
+    
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div>
+            <h1>Book Your Flights Easily</h1>
+            <p>Find the best deals for your flights and travel destinations.</p>
+            
+            
+
+
+
+
+        </div>
+    </div>
+
+<!-- Booking Form -->
+<div class="booking-container" id="bookingSection" style="max-width: 800px; margin: 0 auto; padding: 20px; background-color: #e0e0e0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <div class="booking-header">
+        <h1 style="text-align: center; font-family: 'Arial', sans-serif; color: #333;">Book Your Flight</h1>
+    </div>
+
+    
+
+    <!-- Trip Type Selection -->
+    <div class="trip-type" style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <button id="oneWayBtn" class="trip-button active" onclick="selectTripType('oneWay')">One Way</button>
+        <button id="roundTripBtn" class="trip-button" onclick="selectTripType('roundTrip')">Round Trip</button>
+    </div>
+
+    <form>
+        <!-- Two Vertically Aligned Booking Tables -->
+        <div class="form-group">
+            <div class="booking-table" id="oneWayTable">
+                <h2 style="text-align: center;">One Way</h2>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="departure" style="font-family: 'Arial', sans-serif; font-weight: bold;"> <span class="emoji-icon">✈️</span> From</label>
+                        <select id="departure" required onchange="validateSelection()">
+                            <option value="" disabled selected>Select Departure</option> <!-- Placeholder option -->
+                            <option value="DEL">Delhi (DEL)</option>
+                            <option value="GAU">Guwahati (GAU)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1; margin-left: 10px;">
+                        <label for="destination" style="font-family: 'Arial', sans-serif; font-weight: bold;"> <span class="emoji-icon">🛬</span> To</label>
+                        <select id="destination" required onchange="validateSelection()">
+                            <option value="" disabled selected>Select Destination</option> <!-- Placeholder option -->
+                            <option value="DEL">Delhi (DEL)</option>
+                            <option value="GAU">Guwahati (GAU)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="selectionErrorOneWay" style="margin-top: 10px; color: red;"></div> <!-- Error message for one-way -->
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="flightDate" style="font-family: 'Arial', sans-serif; font-weight: bold;">Date of Flight</label>
+                        <input type="date" id="flightDate" required>
+                    </div>
+                    <div style="flex: 1; margin-left: 10px;">
+                        <label for="passengers" style="font-family: 'Arial', sans-serif; font-weight: bold;">Number of Passengers</label>
+                        <input type="number" id="passengers" min="1" placeholder="Enter Number of Passengers" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="class" style="font-family: 'Arial', sans-serif; font-weight: bold;">Class</label>
+                        <select id="class" required>
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First Class</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-table" id="roundTripTable" style="display: none;">
+                <h2 style="text-align: center;">Round Trip</h2>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="departureRound" style="font-family: 'Arial', sans-serif; font-weight: bold;"> <span class="emoji-icon">✈️</span> From</label>
+                        <select id="departureRound" required onchange="validateSelection()">
+
+                            <option value="" disabled selected>Select Departure</option> <!-- Placeholder option -->
+                            <option value="DEL">Delhi (DEL)</option>
+                            <option value="GAU">Guwahati (GAU)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1; margin-left: 10px;">
+                        <label for="destinationRound" style="font-family: 'Arial', sans-serif; font-weight: bold;"> <span class="emoji-icon">🛬</span> To</label>
+                        <select id="destinationRound" required onchange="validateSelection()">
+
+                            <option value="" disabled selected>Select Destination</option> <!-- Placeholder option -->
+                            <option value="DEL">Delhi (DEL)</option>
+                            <option value="GAU">Guwahati (GAU)</option>
+                            <option value="BOM">Mumbai (BOM)</option>
+                            <option value="BLR">Bangalore (BLR)</option>
+                            <option value="CCU">Kolkata (CCU)</option>
+                            <option value="HYD">Hyderabad (HYD)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="selectionErrorRoundTrip" style="margin-top: 10px; color: red;"></div> <!-- Error message for round trip -->
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="flightDateRound" style="font-family: 'Arial', sans-serif; font-weight: bold;">Departure Date</label>
+                        <input type="date" id="flightDateRound" required>
+                    </div>
+                    <div style="flex: 1; margin-left: 10px;">
+                        <label for="returnDateRound" style="font-family: 'Arial', sans-serif; font-weight: bold;">Return Date</label>
+                        <input type="date" id="returnDateRound">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="flex: 1; margin-right: 10px;">
+                        <label for="passengersRound" style="font-family: 'Arial', sans-serif; font-weight: bold;">Number of Passengers</label>
+                        <input type="number" id="passengersRound" min="1" placeholder="Enter Number of Passengers" required>
+                    </div>
+                    <div style="flex: 1; margin-left: 10px;">
+                        <label for="classRound" style="font-family: 'Arial', sans-serif; font-weight: bold;">Class</label>
+                        <select id="classRound" required>
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First Class</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group full-width" style="text-align: center;">
+            <button type="submit" class="search-button" style="padding: 10px 20px; border: none; border-radius: 5px; background-color: orange; color: white; cursor: pointer; font-family: 'Arial', sans-serif;">Search Flights</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function showBookingTables() {
+        var bookingSection = document.getElementById('bookingSection');
+        if (bookingSection) {
+            bookingSection.style.display = 'block'; // Show the booking section
+            selectTripType('oneWay'); // Optionally set default trip type
+        }
+    }
+
+    function selectTripType(type) {
+        var oneWayBtn = document.getElementById('oneWayBtn');
+        var roundTripBtn = document.getElementById('roundTripBtn');
+        var oneWayTable = document.getElementById('oneWayTable');
+        var roundTripTable = document.getElementById('roundTripTable');
+
+        if (type === 'oneWay') {
+            oneWayBtn.classList.add('active');
+            roundTripBtn.classList.remove('active');
+            oneWayTable.style.display = 'block'; // Show one way table
+            roundTripTable.style.display = 'none'; // Hide round trip table
+        } else {
+            oneWayBtn.classList.remove('active');
+            roundTripBtn.classList.add('active');
+            oneWayTable.style.display = 'none'; // Hide one way table
+            roundTripTable.style.display = 'block'; // Show round trip table
+        }
+    }
+
+    // Set default to One Way on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        showBookingTables(); // Show the booking tables if needed
+    });
+</script>
+
+
+
+<style>
+
+    .booking-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid gray; /* Gray border */
+        border-radius: 10px;
+        background-color: transparent; /* Transparent background for the container */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: none; /* Initially hidden */
+    }
+    .booking-table {
+        background-color: rgba(255, 255, 255, 0.5); /* Slightly transparent white background for the table */
+        padding: 20px; /* Add padding inside the table */
+        border-radius: 10px; /* Rounded corners for inner content */
+    }
+    .trip-button {
+        background-color: #f0f0f0;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 0 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .trip-button:hover {
+        background-color: #e0e0e0;
+    }
+
+    .trip-button.active {
+        background-color: orange;
+        color: white;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    /* Updated style for inputs and selects */
+    .form-group input, .form-group select {
+        width: calc(100% - 22px); /* Full width minus padding and border */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-group input[type="number"] {
+        width: 100%; /* Ensures number input has full width */
+    }
+
+    .form-group input[type="date"] {
+        padding: 8px; /* Adjust padding for date input */
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+</style>
+
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>We are a team of passionate individuals who believe in making travel easier for everyone. Our platform allows you to find and book flights quickly and effortlessly. With us, you can plan your journey without any hassle, ensuring a smooth and memorable experience.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="features-content">
+            <div class="feature">
+                <img src="image3.jpg" alt="Feature 1">
+                <h3>Fast Booking</h3>
+                <p>Get your tickets booked in just a few clicks with our easy-to-use interface.</p>
+            </div>
+            <div class="feature">
+                <img src="image4.jpg" alt="Feature 2">
+                <h3>Best Prices</h3>
+                <p>We offer competitive prices to help you find the best deals on flights.</p>
+            </div>
+            <div class="feature">
+                <img src="image5.jpg" alt="Feature 3">
+                <h3>24/7 Support</h3>
+                <p>Our team is available around the clock to assist you with any inquiries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <h2>What Our Customers Say</h2>
+        <div class="review-cards">
+            <div class="review-card">
+                <strong>John Doe</strong>
+                <p>Excellent platform, found my flights quickly!</p>
+            </div>
+            <div class="review-card">
+                <strong>Jane Smith</strong>
+                <p>Very easy to navigate, love the interface.</p>
+            </div>
+            <div class="review-card">
+                <strong>Emily Johnson</strong>
+                <p>Fast, reliable, and affordable!</p>
+            </div>
+        </div>
+
+        <div class="review-section">
+            <h2 class="review-title">Leave a Review 📝</h2>
+            <form class="review-form">
+                <label for="reviewerName">Your Name:</label>
+                <input type="text" id="reviewerName" placeholder="Enter your name" required>
+        
+                <label for="reviewText">Your Review:</label>
+                <textarea id="reviewText" rows="5" placeholder="Write your review here..." required></textarea>
+        
+                <button type="submit" class="submit-button">Submit Review 🚀</button>
+            </form>
+        </div>
+        
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-section">
+            <h2 class="contact-title">Contact Us 📞</h2>
+            <form class="contact-form">
+                <label for="contactName">Your Name:</label>
+                <input type="text" id="contactName" placeholder="Enter your name" required>
+        
+                <label for="contactEmail">Your Email:</label>
+                <input type="email" id="contactEmail" placeholder="Enter your email" required>
+        
+                <label for="contactMessage">Message:</label>
+                <textarea id="contactMessage" rows="5" placeholder="Write your message here..." required></textarea>
+        
+                <button type="submit" class="submit-button">Send Message ✉️</button>
+            </form>
+        </div>
+        
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DREAMFLY PVT CORP. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Handle review submission
+        document.getElementById('review-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your review!');
+        });
+
+        // Handle contact form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Your message has been sent!');
+        });
+    </script>
+
+<script>
+    // JavaScript to handle trip type selection and show/hide return date
+    function selectTripType(type) {
+        var oneWayBtn = document.getElementById('oneWayBtn');
+        var roundTripBtn = document.getElementById('roundTripBtn');
+        var oneWayTable = document.getElementById('oneWayTable');
+        var roundTripTable = document.getElementById('roundTripTable');
+
+        if (type === 'oneWay') {
+            oneWayBtn.classList.add('active');
+            roundTripBtn.classList.remove('active');
+            oneWayTable.style.display = 'block';
+            roundTripTable.style.display = 'none'; // Hide round trip table
+        } else {
+            oneWayBtn.classList.remove('active');
+            roundTripBtn.classList.add('active');
+            oneWayTable.style.display = 'none'; // Hide one way table
+            roundTripTable.style.display = 'block'; // Show round trip table
+        }
+
+        // Clear any existing error messages when switching
+        clearErrorMessages();
+    }
+
+    // Validate the selected airports
+    function validateSelection() {
+        var departureOneWay = document.getElementById('departure').value;
+        var destinationOneWay = document.getElementById('destination').value;
+        var departureRoundTrip = document.getElementById('departureRound').value;
+        var destinationRoundTrip = document.getElementById('destinationRound').value;
+
+        var errorMessageOneWay = '';
+        var errorMessageRoundTrip = '';
+
+        // Check for one-way selection
+        if (departureOneWay && destinationOneWay && departureOneWay === destinationOneWay) {
+            errorMessageOneWay = 'Departure and destination airports cannot be the same.';
+        }
+
+        // Check for round-trip selection
+        if (departureRoundTrip && destinationRoundTrip && departureRoundTrip === destinationRoundTrip) {
+            errorMessageRoundTrip = 'Departure and destination airports cannot be the same.';
+        }
+
+        // Display the error messages if applicable
+        document.getElementById('selectionErrorOneWay').textContent = errorMessageOneWay;
+        document.getElementById('selectionErrorRoundTrip').textContent = errorMessageRoundTrip;
+    }
+
+    // Clear error messages
+    function clearErrorMessages() {
+        document.getElementById('selectionErrorOneWay').textContent = '';
+        document.getElementById('selectionErrorRoundTrip').textContent = '';
+    }
+
+    // Set default to One Way
+    selectTripType('oneWay');
+</script>
+<script>
+    function logout() {
+        alert('You have successfully logged out!');
+        window.location.href = "index.html"; // Redirect to login page
+    }
+</script>
+
+
+
+
+</body>
+</html>

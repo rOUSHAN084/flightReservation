@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking - DREAMFLY</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centered Navigation Bar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        .navbar .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .logo span {
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInText 2s ease-in-out;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 10px 0 0 0;
+            padding: 0;
+            display: inline-block;
+        }
+
+        .navbar ul li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff9800;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Booking Form Container */
+        .booking-container {
+            background-color: #d3d3d3; /* Grey container color */
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .booking-header h1 {
+            font-size: 32px;
+            color: #007bff;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            flex: 0 0 48%;
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            flex: 0 0 100%;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        /* Round Trip Buttons */
+        .trip-type {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .trip-type button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .trip-type button.active {
+            background-color: #0056b3;
+        }
+
+        /* Button */
+        button[type="submit"] {
+            background-color: #ff9800; /* Orange search button */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #e68900;
+        }
+
+        /* Styling for return date */
+        .return-date {
+            display: none;
+        }
+
+        /* Rounded Box */
+        .booking-container {
+            background-color: #d3d3d3; /* Grey background */
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
+
+        /* Flight Icons for From and To */
+        .form-group .emoji-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Dropdown Styling */
+        select {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navbar">
+    <div class="logo">
+        <img src="logo.jpg" alt="Logo">
+        <span>DREAMFLY</span>
+    </div>
+    <ul>
+        <li><a href="#flight">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contactus">Contact Us</a></li>
+    </ul>
+</div>
+
+<!-- Booking Form -->
+<div class="booking-container">
+    <div class="booking-header">
+        <h1>Book Your Flight</h1>
+    </div>
+
+    <!-- Trip Type Selection -->
+    <div class="trip-type">
+        <button id="oneWayBtn" class="active" onclick="selectTripType('oneWay')">One Way</button>
+        <button id="roundTripBtn" onclick="selectTripType('roundTrip')">Round Trip</button>
+    </div>
+
+    <form>
+        <!-- From and To Fields with Icons -->
+        <div class="form-group">
+            <label for="departure"><span class="emoji-icon">✈️</span>From</label>
+            <select id="departure">
+                <option value="DEL">Delhi (DEL)</option>
+                <option value="BOM">Mumbai (BOM)</option>
+                <option value="BLR">Bangalore (BLR)</option>
+                <option value="CCU">Kolkata (CCU)</option>
+                <option value="HYD">Hyderabad (HYD)</option>
+                <!-- Add more Indian airports -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="destination"><span class="emoji-icon">🛬</span>To</label>
+            <select id="destination">
+                <option value="DEL">Delhi (DEL)</option>
+                <option value="BOM">Mumbai (BOM)</option>
+                <option value="BLR">Bangalore (BLR)</option>
+                <option value="CCU">Kolkata (CCU)</option>
+                <option value="HYD">Hyderabad (HYD)</option>
+                <!-- Add more Indian airports -->
+            </select>
+        </div>
+
+        <!-- Date of Flight and Return Date -->
+        <div class="form-group">
+            <label for="flightDate">Date of Flight</label>
+            <input type="date" id="flightDate">
+        </div>
+        <div class="form-group return-date">
+            <label for="returnDate">Return Date (Optional)</label>
+            <input type="date" id="returnDate">
+        </div>
+
+        <!-- Number of Passengers -->
+        <div class="form-group">
+            <label for="passengers">Number of Passengers</label>
+            <input type="number" id="passengers" min="1" placeholder="Enter Number of Passengers">
+        </div>
+
+        <!-- Flight Class -->
+        <div class="form-group">
+            <label for="class">Class</label>
+            <select id="class">
+                <option value="economy">Economy</option>
+                <option value="business">Business</option>
+                <option value="first">First Class</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group full-width">
+            <button type="submit">Search Flights</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // JavaScript to handle trip type selection and show/hide return date
+    function selectTripType(type) {
+        var oneWayBtn = document.getElementById('oneWayBtn');
+        var roundTripBtn = document.getElementById('roundTripBtn');
+        var returnDateField = document.querySelector('.return-date');
+
+        if (type === 'oneWay') {
+            oneWayBtn.classList.add('active');
+            roundTripBtn.classList.remove('active');
+            returnDateField.style.display = 'none'; // Hide return date
+        } else {
+            oneWayBtn.classList.remove('active');
+            roundTripBtn.classList.add('active');
+            returnDateField.style.display = 'block'; // Show return date
+        }
+    }
+
+    // Set default to One Way
+    selectTripType('oneWay');
+</script>
+
+</body>
+</html>

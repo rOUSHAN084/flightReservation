@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css"> <!-- External CSS file -->
+</head>
+<body>
+    <div class="form-container">
+        <h1>Login</h1>
+        <form onsubmit="return loginUser(event)">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="Enter your email">
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Enter your password">
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="signup.html">Sign Up</a> | <a href="forgot.html">Forgot Password?</a></p>
+    </div>
+    <script>
+        function loginUser(event) {
+            event.preventDefault(); // Prevent page reload
+            // For simplicity, assume login is always successful
+            alert('Login successful!');
+            window.location.href = "flight.html"; // Redirect to flight page
+        }
+    </script>
+</body>
+</html>

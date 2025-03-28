@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reservation - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container button:hover {
+            background-color: #0056b3;
+        }
+
+        .link {
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Enter Email" required>
+        <input type="password" id="login-password" placeholder="Enter Password" required>
+        <button onclick="login()">Login</button>
+        <a href="#" class="link" onclick="showSignUp()">Sign Up</a>
+        <a href="#" class="link" onclick="forgotPassword()">Forgot Password?</a>
+    </div>
+
+    <div class="container" id="signup-container" style="display: none;">
+        <h2>Sign Up</h2>
+        <input type="email" id="signup-email" placeholder="Enter Email" required>
+        <input type="password" id="signup-password" placeholder="Enter Password" required>
+        <button onclick="signUp()">Sign Up</button>
+        <a href="#" class="link" onclick="showLogin()">Back to Login</a>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation for demo
+            if (email === localStorage.getItem('userEmail') && password === localStorage.getItem('userPassword')) {
+                alert('Login successful!');
+                window.location.href = 'flight.html'; // Redirect to flight.html
+            } else {
+                alert('Invalid credentials!');
+            }
+        }
+
+        function signUp() {
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (email && password) {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                alert('Sign up successful! Redirecting to login page.');
+                showLogin();
+            } else {
+                alert('Please fill in all fields!');
+            }
+        }
+
+        function forgotPassword() {
+            const email = prompt('Enter your registered email:');
+
+            if (email === localStorage.getItem('userEmail')) {
+                alert(`Your password is: ${localStorage.getItem('userPassword')}`);
+            } else {
+                alert('Email not found!');
+            }
+        }
+
+        function showSignUp() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

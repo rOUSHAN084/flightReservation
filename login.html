@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Sign Up</h1>
+        <form method="post" action="anything.php">
+            <label for="email">Email</label>
+            <input type="email" name="email" required placeholder="Enter your email">
+            <label for="password">Password</label>
+            <input type="password" name="password" required placeholder="Create a password">
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <p><a href="index.html">Back to Login</a></p>
+    </div>
+    <script>
+        function registerUser(event) {
+            event.preventDefault(); // Prevent page reload
+            alert('Sign-Up successful! Please log in.');
+            window.location.href = "index.html"; // Redirect to login
+        }
+    </script>
+</body>
+</html>
